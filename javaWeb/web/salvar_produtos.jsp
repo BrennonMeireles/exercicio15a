@@ -24,15 +24,23 @@
             PreparedStatement st;
             Class.forName("com.mysql.cj.jdbc.Driver");
             
-String url = "jdbc:myql://localhost:3307/bancojsp";
+            String url = "jdbc:myql://localhost:3307/bancojsp";
             String user = "root";
             String password = "";
             conecta = DriverManager.getConnection(url,user,password);
             
+//          insere os dados na tabela produto
+//          do o banco de dados aberto
+
+            String sql = ("INSERT INTO produto VALUES ? ? ? ?");
+            st = conecta.prepareStatement(sql);
+            st.setInt   (1, codigo); // indica que sera inserido no primeiro campo
+            st.setString(2, nome);
+            st.setString(3, marca);
+            st.setDouble(4, preco);
             
-            
-            
-            
+            st.executeUpdate(); // executa o comando INSERT
+            out.println("<p><strong>Produto cadastrado com sucesso...</strong></p>");
             
         %>
     </body>
